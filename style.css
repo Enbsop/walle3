@@ -1,0 +1,162 @@
+body {
+    background-image: url('fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+@font-face {
+    font-family: 'Gunship';
+    src: url('fonts/gunship.ttf') format('truetype');
+    /* Si el archivo tiene otro nombre, por ejemplo 'Gunship-Regular.ttf', 
+       cambia la URL a 'fonts/Gunship-Regular.ttf' */
+}
+
+/* ------------------- Contenedor del Chat (Adaptable) ------------------- */
+.chat-container {
+    width: 80vw; /* Usa el 80% del ancho del viewport */
+    height: 80vh; /* Usa el 80% de la altura del viewport */
+    max-width: 450px; /* Evita que el contenedor sea demasiado grande en pantallas amplias */
+    max-height: 800px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ------------------- Mensajes y Animación de Aparición (Adaptable) ------------------- */
+.message {
+    position: absolute;
+    padding: 15px 50px;
+    border-radius: 25px;
+    font-size: clamp(14px, 3vw, 18px); 
+    max-width: 70%;
+    opacity: 0;
+    animation-timing-function: ease-in-out;
+    z-index: 20; 
+    color: #f3f709; 
+    animation-fill-mode: forwards;
+    
+    /* Agrega esta línea para cambiar la tipografía */
+    font-family: 'Gunship', sans-serif;
+}
+
+/* Clase que aplicará la animación de pulso */
+.pulsing {
+    animation: pulse-animation 3s ease-in-out infinite alternate;
+}
+
+.user-message {
+    background-color: rgba(255, 255, 255, 0.25);
+    right: 15px;
+    border-bottom-right-radius: 5px;
+    text-align: right;
+}
+
+.other-message {
+    background-color: rgba(144, 238, 144, 0.25);
+    left: 15px;
+    border-bottom-left-radius: 5px;
+    text-align: left;
+}
+
+@keyframes move-and-fade {
+    0% {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-animation {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-3px) scale(1.01); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+.pulsing {
+    animation: pulse-animation 3s ease-in-out infinite alternate;
+}
+
+/* ------------------- Wall-E (Recorre la página completa) ------------------- */
+.wall-e {
+    position: absolute;
+    top: 5vh; /* Se mueve a 5% de la altura de la página desde arriba */
+    width: 10vw; /* Usa el 20% del ancho del viewport */
+    height: auto;
+    left: -10vw; /* Empieza fuera de la pantalla por la izquierda */
+    animation: wall-e-walk 15s linear infinite; /* Animación más larga para recorrer más distancia */
+    z-index: 2; /* Un z-index menor que el chat-container pero mayor que el fondo */
+}
+
+@keyframes wall-e-walk {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Se mueve a través de todo el ancho de la página (100vw) más su propio ancho */
+        transform: translateX(calc(100vw + 20vw));
+    }
+}
+
+/* ------------------- Media Queries para Dispositivos Móviles (Ajustado) ------------------- */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 95vw;
+        height: 90vh;
+        border-radius: 15px;
+    }
+    
+    .wall-e {
+        width: 30vw;
+        left: -30vw;
+    }
+
+    @keyframes wall-e-walk {
+        100% {
+            transform: translateX(calc(100% + 30vw));
+        }
+    }
+}
+@keyframes pulse-animation {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-3px) scale(1.01); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+.pulsing {
+    animation: pulse-animation 3s ease-in-out infinite alternate;
+}
+
+/* ... (todo tu CSS anterior) ... */
+
+/* ------------------- Destellos ------------------- */
+.sparkle {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 50%; /* Le da forma de círculo */
+    animation: twinkle linear infinite; /* Animación de parpadeo */
+    z-index: 0;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.7); /* Brillo alrededor */
+}
+
+@keyframes twinkle {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.5); opacity: 0; }
+}
